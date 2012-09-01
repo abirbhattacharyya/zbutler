@@ -1,0 +1,11 @@
+<div id="spinner" class="ui-spinner"></div>
+<div id="gifts_div">
+  <%=render :partial => "gift_details"%>
+</div>
+<%if @gifts and @gifts.empty?%>
+  <script type="text/javascript">      
+      //$("spinner").innerHTML = "<center><img src='/images/spinner2.gif' alt='The Image' /></center>";
+      jQuery.blockUI({message: "<img src='/images/spinner2.gif' alt='The Image' />" });
+      get_amazon_data(<%=@friend.id%>);      
+  </script>
+<%end%>

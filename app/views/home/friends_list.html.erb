@@ -1,0 +1,40 @@
+<a class="prev browse left"></a>
+<div  class="scrollable">  
+  <div class="items">
+    <%@friends.each_slice(8).to_a.each do |friends|%>
+      <div>
+        <%friends.each do |friend|%>
+          <a href="#" id="<%=friend.uid%>" onclick="getGifts(this.id)"  ><%=image_tag (friend.pic_url), :alt => "",:id => "img_#{friend.uid}",:title => friend.name%></a>
+        <%end%>
+      </div>
+    <%end%>
+  </div>  
+</div>
+<a class="next browse right"></a>
+<div class="x-divider"></div>
+
+<div id="gift_suggestions_div">
+</div>
+<script type="text/javascript">
+//  jQuery.noConflict();
+/* calling thumbnailScroller function with options as parameters */
+jQuery(function() {
+  // initialize scrollable
+  jQuery(".scrollable").scrollable({circular: true, mousewheel: true});
+
+});
+
+function getGifts(id){
+  var fb_sign_req = '<%=session[:signed_request]%>';
+  jQuery(".items img").removeClass("active");
+  jQuery("#img_"+id).addClass("active");
+  jQuery.blockUI({message: "<img src='/images/spinner2.gif' alt='The Image' />" });
+  jQuery.get("/gifts/"+id,{signed_request: fb_sign_req},function() {
+    jQuery.unblockUI();
+  });
+
+}
+
+getGifts(<%=@friends.first.uid%>);
+
+</script>

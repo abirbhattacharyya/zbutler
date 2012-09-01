@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title><%= h(yield(:title) || "Untitled") %></title>
+    
+    
+    <!--[if lte IE 6]>
+      <%= stylesheet_link_tag 'global-ie6'%>
+    <![endif]-->
+    <%= javascript_include_tag :defaults %>
+    <%= javascript_include_tag "jquery.min","jquery-ui-1.8.13.custom.min","jquery.tools.min",'jquery.blockUI','global' %>
+    <script type="text/javascript" language="javascript">
+        jQuery.noConflict();
+    </script>
+    <%= stylesheet_link_tag 'reset','global',"scrollable-buttons","scrollable-horizontal" %>
+  </head>
+  <body>
+
+  <div id="layout">
+    <div id="header">
+      <%=link_to "Zbutler",root_path(:signed_request => session[:signed_request]),:class => "logo"%>
+      <ul>
+        <%if request.path != root_path%>
+          <li>
+            <%=link_to "Home",root_path(:signed_request => session[:signed_request]) ,:class =>((request.path == root_path) ? "current" : '')%>
+          </li>
+        <%end%>
+        <li>
+          <%=link_to "Friends &amp; Stuff".html_safe,friends_path(:signed_request => session[:signed_request]) ,:class =>((request.path == friends_path) ? "current" : '')%>
+        </li>
+        <li><%=link_to "Invite Friends".html_safe,invite_friends_path(:signed_request => session[:signed_request]) ,:class =>((request.path == invite_friends_path) ? "current" : '')%></li>
+      </ul>
+    </div><!-- #header -->
+
+    <div id="content">
+        <%=yield%>
+    </div><!-- #content -->
+  </div><!-- #layout -->
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-29176835-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+  </script>
+  </body>
+</html>

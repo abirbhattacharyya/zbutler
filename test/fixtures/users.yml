@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  fb_uid: 1
+  email_hash: MyString
+
+two:
+  fb_uid: 1
+  email_hash: MyString

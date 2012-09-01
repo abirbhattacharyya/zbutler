@@ -1,0 +1,22 @@
+<div id="fb-root"></div>
+  <script src="http://connect.facebook.net/en_US/all.js"></script>
+  <div class="invite">
+        Go ahead invite your friends so they can have fun!
+        <%=link_to "Invite","javascript:void(0)",:onclick => "sendRequestViaMultiFriendSelector(); return false;"%>
+    </div>
+<script>
+    FB.init({
+      appId  : '<%=fb_app_id%>',
+    });
+
+    function sendRequestViaMultiFriendSelector() {
+      FB.ui({method: 'apprequests',
+        message: 'Gift Suggestion App',
+        exclude_ids : [<%= get_all_fb_user_ids*", " %>]
+      }, requestCallback);
+    }
+
+    function requestCallback(response) {
+      // Handle callback here
+    }
+</script>

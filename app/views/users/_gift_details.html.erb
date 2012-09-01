@@ -1,0 +1,17 @@
+<% unless @gifts.empty? %>
+  <h1 class="headline">Hey, possible gifts for <%=@friend.name%></h1>
+  <ul class="slides">
+  <% for gift in @gifts %>        
+      <li>
+        <%=link_to (image_tag gift.image_url,:alt => ""),gift.product_url,:class => "thumb"%>
+        <p>
+          <%= link_to(truncate(gift.name,:length => 103), gift.product_url, :target => "_new") %><br/>
+          <%= link_to(gift.category, gift.product_url, :target => "_new") %><br/>          
+          <%= link_to( "$%s"%number_with_delimiter(gift.price), gift.product_url, :target => "_new") %>
+        </p>
+        <%=link_to "Buy from Amazon!",gift.product_url,:class => "buy", :target => "_new"%>
+      </li>
+    
+  <% end %>
+  </ul>
+<% end %>
